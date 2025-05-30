@@ -1,0 +1,309 @@
+body {
+	font-family: Arial, sans-serif;
+	padding: 20px;
+	background: #f0f0f0;
+	overflow-x: hidden;
+}
+
+h1 {
+	text-align: center;
+}
+
+#calendar {
+	max-width: 900px;
+	margin: 0 auto;
+	background: white;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+#task-panel {
+	max-width: 600px;
+	margin: 20px auto;
+	background: white;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.hidden {
+	display: none;
+}
+
+input,
+select,
+button {
+	margin-top: 5px;
+	display: block;
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+/* ... poprzednia zawartość ... */
+
+/* Przyciski poprzedni/następny */
+.fc .fc-button.fc-prev-button,
+.fc .fc-button.fc-next-button {
+	background-color: #4dabf7;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 14px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	margin: 0 5px;
+	/* mały odstęp między przyciskami */
+}
+
+.fc .fc-button.fc-prev-button:hover,
+.fc .fc-button.fc-next-button:hover {
+	background-color: #339af0;
+}
+
+/* Jeśli masz też przyciski z klasą fc-button-primary, to zrób tak: */
+.fc .fc-button.fc-button-primary {
+	background-color: #4dabf7;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 14px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.fc .fc-button.fc-button-primary:hover {
+	background-color: #339af0;
+}
+
+.task-short {
+	background-color: #cce5ff;
+	padding: 2px 5px;
+	margin-top: 2px;
+	font-size: 0.75em;
+	border-radius: 3px;
+	position: relative;
+	transition: background-color 0.3s ease;
+
+	max-width: 100%;
+	white-space: normal;
+	/* pozwala na zawijanie */
+	word-wrap: break-word;
+	/* łamie długie słowa */
+	overflow-wrap: anywhere;
+	/* pozwala łamać w dowolnym miejscu */
+}
+
+.task-short.done {
+	background-color: #a6e6a1;
+	color: #2a662a;
+	font-weight: bold;
+}
+
+#task-list {
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
+}
+
+/* #task-list li {
+	background: #f8f9fa;
+	padding: 12px 15px;
+	margin-bottom: 8px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	transition: background 0.2s;
+}
+
+#task-list li:hover {
+	background: #e9ecef;
+} */
+#task-list li {
+	background: #f8f9fa;
+	padding: 12px 15px;
+	margin-bottom: 8px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	/* odstęp między checkboxem a tekstem */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	transition: background 0.2s;
+}
+
+/* Efekt hover */
+#task-list li:hover {
+	background: #e9ecef;
+}
+#task-list input[type='checkbox'] {
+	width: 20px;
+	height: 20px;
+	appearance: auto !important;
+	opacity: 1 !important;
+	position: static !important;
+	display: inline-block !important;
+	background: transparent !important;
+}
+
+/* Stylizacja checkboxów */
+#task-list input[type='checkbox'] {
+	margin-right: 10px;
+	transform: scale(1.2);
+	cursor: pointer;
+}
+
+/* Ogólny styl przycisków */
+#task-list button {
+	margin-left: 10px;
+	padding: 5px 12px;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.2s;
+	font-weight: 500;
+}
+
+/* Przycisk Edytuj */
+#task-list button:first-of-type {
+	background-color: #4dabf7;
+	color: white;
+}
+
+#task-list button:first-of-type:hover {
+	background-color: #339af0;
+}
+
+/* Przycisk Usuń */
+#task-list button:last-of-type {
+	background-color: #ff6b6b;
+	color: white;
+}
+
+#task-list button:last-of-type:hover {
+	background-color: #fa5252;
+}
+
+/* Modal - wyśrodkowany panel */
+#task-panel {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1001;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+}
+
+/* Overlay - tło za panelem */
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+
+#task-panel {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+
+#close-panel {
+	position: absolute;
+	top: 0px;
+	right: -40%;
+	background: none;
+	border: none;
+	font-size: 20px;
+	color: #ff0000;
+	cursor: pointer;
+}
+
+#close-panel:hover {
+	color: #000;
+}
+
+/* Responsywność - Mobile (max-width: 768px) */
+/* Responsywność - Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+	#task-panel {
+		width: 90%;
+		max-width: none;
+		padding: 15px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		max-height: 80vh;
+		overflow-y: auto;
+		overflow-x: hidden;
+		box-sizing: border-box;
+		border-radius: 10px;
+	}
+
+	#close-panel {
+		top: 10px;
+		right: 10px;
+		font-size: 22px;
+		color: #ff0000;
+		position: absolute;
+	}
+
+	#calendar {
+		width: 100%;
+		max-width: 100%;
+		margin: 0 auto;
+		padding: 0 10px;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		padding: 10px;
+		overflow-x: hidden;
+	}
+
+	#calendar {
+		width: 100%;
+		max-width: 100%;
+		height: 540px;
+		margin: 0 auto;
+		padding: 0 10px;
+	}
+
+	#task-panel {
+		width: 95%;
+		padding: 15px;
+		max-height: 75vh;
+		overflow-y: auto;
+		overflow-x: hidden;
+		box-sizing: border-box;
+	}
+
+	#add-task-form input,
+	#add-task-form select,
+	#add-task-form button {
+		font-size: 14px;
+	}
+
+	#task-list {
+		max-height: 40%;
+		overflow-y: auto;
+		overflow-x: hidden;
+		padding-right: 10px;
+	}
+
+	#close-panel {
+		top: 0%;
+		right: -40%;
+		font-size: 24px;
+	}
+}
