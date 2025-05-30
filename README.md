@@ -43,5 +43,5 @@ Projekt interaktywnego kalendarza do zarządzania zadaniami. Może służyć jak
 
 ## 🧑‍💻 Autor
 
-Projekt stworzony przez [Twoje Imię i Nazwisko] jako część portfolio programistycznego.
+Projekt stworzony przez [Mateusz Biernacki] jako część portfolio programistycznego.
 
